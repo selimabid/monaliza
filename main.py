@@ -28,7 +28,7 @@ print("Server Running Because of Axo")
 
 
 GUILD_ID = 1252689693804462252  # Your server ID
-MESSAGE_ID = 1252701957299376302  # Message ID to react to
+MESSAGE_ID = 1252792422409441451  # Message ID to react to
 
 # Dictionary mapping emojis (as strings) to role names
 emoji_role_mapping = {
