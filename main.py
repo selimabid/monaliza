@@ -27,7 +27,7 @@ keep_alive()
 print("Server Running Because of Axo")
 
 
-GUILD_ID = 1252748030596354048  # Your server ID
+GUILD_ID = 520530782268162048  # Your server ID
 MESSAGE_ID = 1252958696628158545  # Message ID to react to
 
 # Dictionary mapping emojis (as strings) to role names
