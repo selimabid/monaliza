@@ -27,13 +27,13 @@ keep_alive()
 print("Server Running Because of Axo")
 
 
-GUILD_ID = 1252689693804462252  # Your server ID
+GUILD_ID = 1252748030596354048  # Your server ID
 MESSAGE_ID = 1252792422409441451  # Message ID to react to
 
 # Dictionary mapping emojis (as strings) to role names
 emoji_role_mapping = {
-    "1️⃣": "Role1",
-    "2️⃣": "Role2",
+    "1️⃣": "huh",
+    "2️⃣": "mochhuh",
     # Add more emojis and corresponding role names as needed
 }
 
