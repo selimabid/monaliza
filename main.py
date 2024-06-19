@@ -55,7 +55,7 @@ async def hello(ctx):
 @Client.event
 async def on_member_join(member):
     print(f"{member} has joined the server.")
-    channel = discord.utils.get(member.guild.text_channels, name="general")
+    channel = discord.utils.get(member.guild.text_channels, name="mod-shit")
     if channel:
         await channel.send(f"Welcome to the server, {member.mention}!")
 
@@ -63,7 +63,7 @@ async def on_member_join(member):
 @Client.event
 async def on_member_remove(member):
     print(f"{member} has left the server!")
-    channel = discord.utils.get(member.guild.text_channels, name="general")
+    channel = discord.utils.get(member.guild.text_channels, name="mod-shit")
     if channel:
         await channel.send(f"Baslema, {member.mention}!")
 
