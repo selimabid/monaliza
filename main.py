@@ -4,9 +4,20 @@ import random
 from discord import app_commands
 from discord.ext import commands
 import discord
+import youtube_dl
 
 GUILD_ID = 520530782268162048  # Your server ID
 MESSAGE_ID = 1252958696628158545  # Message ID to react to
+
+
+voice_clients = []
+
+
+yt_dl_opts={'format':'bestaudio/best'}
+ytdl=youtube_dl.YoutubeDL(yt_dl_opts)
+
+
+ffmpeg_options={'options': '-vn'}
 
 # Dictionary mapping emojis (as strings) to role names
 emoji_role_mapping = {
@@ -40,7 +51,7 @@ async def hello(interaction: discord.Interaction):
 @Client.tree.command(name="khadhan",description = "Nkhodhlek chkoun?")
 @app_commands.describe(member_name="chkoun nkhodh",nombre_khadhan="kadeh men khadha?")
 async def khadhan(interaction : discord.Interaction , member_name : discord.Member,nombre_khadhan : int):
-    ##username bech yetbadel / we need to check if user is deafning and he's in vc
+    ##username bech yetbadel / we need to check if user is deafning and he's in vc : done
     print("khadhan command received!")
     specific_channel_id = 1046212040756318319  # ID of the specific voice channel
 
@@ -308,6 +319,41 @@ async def find_admin(guild, member, action):
 async def on_voice_state_update(member, before, after):
     await log_voice_state_update(member, before, after)
 #@app_commands.describe(arg = "Aslema Jungle!") chtosleh fel music part khater tekhou arguements
+
+
+
+@Client.tree.command(name="fan", description="n7otlek fan?")
+@app_commands.describe(url="lien lmusica stp")
+async def fan(interaction: discord.Interaction, url: str):
+    music_channel_id = 715169100456001608
+
+    if interaction.channel.id != music_channel_id:
+        return await interaction.response.send_message("You can only use this command in the music channel.", ephemeral=True)
+
+    try:
+
+        voice_client = await interaction.user.voice.channel.connect()
+        voice_clients[voice_client.guild.id] = voice_client
+
+
+        loop=asyncio.get_event_loop()
+        data=await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
+
+        if data is None:
+            await interaction.response.send_message("Invalid URL or song not found.", ephemeral=True)
+            return
+        
+        song = data[url]
+        player = discord.FFmpegPCMAudio(song, **ffmpeg_options)
+
+        voice_client.play(player)
+    except Exception as e:
+        print(e)
     
+
+
+
+
+
 Client.run(
     "MTI1MjY2MTgyNjU2MzQ3NzUxNQ.GWWp0U.dnrXBLvgTheLqfJl4_aT1CHwvSpCn9XXNSiwGQ")
